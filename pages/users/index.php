@@ -1,1 +1,60 @@
-<?php require_once '../../config/bootstrap.php';$me=requireLogin('../auth/login.php');if($me['role']!=='admin'){flash('Akses pengguna hanya untuk admin.','error');redirect('../books/index.php');}require_once '../../repositories/user-repository.php';$search=trim($_GET['search']??'');$users=getUsers($search);$base='../../';$pageTitle='Manajemen Pengguna';$pageSubtitle='Kelola akun dan peran pengguna';?><!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=$pageTitle?></title><link rel="stylesheet" href="../../styles/users/index.css"></head><body><div class="app-shell"><?php require '../../components/admin/sidebar.php';?><main class="app-main"><?php require '../../components/admin/topbar.php';?><div class="app-content"><div class="toolbar"><form method="GET" action="index.php" class="toolbar-filters"><input name="search" value="<?=e($search)?>" class="search-input" placeholder="Cari nama atau email..."><button class="btn btn-outline btn-sm">Cari</button></form><a href="create.php" class="btn btn-primary">+ Tambah Pengguna</a></div><div class="data-card"><table class="data-table"><thead><tr><th>Nama</th><th>Email</th><th>Role</th><th>Aksi</th></tr></thead><tbody><?php foreach($users as $u):?><tr><td><?=e($u['name'])?></td><td><?=e($u['email'])?></td><td><?=e(ucfirst($u['role']))?></td><td><a href="edit.php?id=<?=$u['id']?>" class="btn btn-outline btn-sm">Edit</a> <a onclick="return confirm('Hapus pengguna ini?')" href="../../actions/users/destroy.php?id=<?=$u['id']?>" class="btn btn-danger btn-sm">Hapus</a></td></tr><?php endforeach;?></tbody></table></div></div></main></div></body></html>
+<?php require_once '../../config/bootstrap.php';
+$me = requireLogin('../auth/login.php');
+if ($me['role'] !== 'admin') {
+    flash('Akses pengguna hanya untuk admin.', 'error');
+    redirect('../books/index.php');
+}
+require_once '../../repositories/user-repository.php';
+$search = trim($_GET['search'] ?? '');
+$users = getUsers($search);
+$base = '../../';
+$pageTitle = 'Manajemen Pengguna';
+$pageSubtitle = 'Kelola akun dan peran pengguna'; ?><!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><?= $pageTitle ?></title>
+    <link rel="stylesheet" href="../../styles/users/index.css">
+</head>
+
+<body>
+    <div class="app-shell"><?php require '../../components/admin/sidebar.php'; ?>
+        <main class="app-main"><?php require '../../components/admin/topbar.php'; ?>
+            <div class="app-content">
+                <div class="toolbar">
+                    <form method="GET" action="index.php" class="toolbar-filters"><input name="search"
+                            value="<?= e($search) ?>" class="search-input" placeholder="Cari nama atau email..."><button
+                            class="btn btn-outline btn-sm">Cari</button></form><a href="create.php"
+                        class="btn btn-primary">+ Tambah Pengguna</a>
+                </div>
+                <div class="data-card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody><?php foreach ($users as $u): ?>
+                                <tr>
+                                    <td><?= e($u['name']) ?></td>
+                                    <td><?= e($u['email']) ?></td>
+                                    <td><?= e(ucfirst($u['role'])) ?></td>
+                                    <td><a href="edit.php?id=<?= $u['id'] ?>" class="btn btn-outline btn-sm">Edit</a> <a
+                                            onclick="return confirm('Hapus pengguna ini?')"
+                                            href="../../actions/users/destroy.php?id=<?= $u['id'] ?>"
+                                            class="btn btn-danger btn-sm">Hapus</a></td>
+                                </tr><?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

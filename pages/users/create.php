@@ -1,1 +1,44 @@
-<?php require_once '../../config/bootstrap.php';$me=requireLogin('../auth/login.php');if($me['role']!=='admin')redirect('../books/index.php');$base='../../';$pageTitle='Tambah Pengguna';$pageSubtitle='Buat akun pengguna baru';?><!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=$pageTitle?></title><link rel="stylesheet" href="../../styles/users/create.css"></head><body><div class="app-shell"><?php require '../../components/admin/sidebar.php';?><main class="app-main"><?php require '../../components/admin/topbar.php';?><div class="app-content"><form method="POST" action="../../actions/users/store.php"><div class="form-card"><div class="form-row"><div class="form-group"><label>Nama</label><input required name="name"></div><div class="form-group"><label>Email</label><input required type="email" name="email"></div></div><div class="form-row"><div class="form-group"><label>Kata Sandi</label><input required minlength="8" type="password" name="password"></div><div class="form-group"><label>Role</label><select name="role"><option value="member">Member</option><option value="admin">Admin</option></select></div></div><div class="form-actions"><a href="index.php" class="btn btn-outline">Batal</a><button type="submit" name="store" value="1" class="btn btn-primary">Simpan</button></div></div></form></div></main></div></body></html>
+<?php require_once '../../config/bootstrap.php';
+$me = requireLogin('../auth/login.php');
+if ($me['role'] !== 'admin')
+    redirect('../books/index.php');
+$base = '../../';
+$pageTitle = 'Tambah Pengguna';
+$pageSubtitle = 'Buat akun pengguna baru'; ?><!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><?= $pageTitle ?></title>
+    <link rel="stylesheet" href="../../styles/users/create.css">
+</head>
+
+<body>
+    <div class="app-shell"><?php require '../../components/admin/sidebar.php'; ?>
+        <main class="app-main"><?php require '../../components/admin/topbar.php'; ?>
+            <div class="app-content">
+                <form method="POST" action="../../actions/users/store.php">
+                    <div class="form-card">
+                        <div class="form-row">
+                            <div class="form-group"><label>Nama</label><input required name="name"></div>
+                            <div class="form-group"><label>Email</label><input required type="email" name="email"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Kata Sandi</label><input required minlength="8"
+                                    type="password" name="password"></div>
+                            <div class="form-group"><label>Role</label><select name="role">
+                                    <option value="member">Member</option>
+                                    <option value="admin">Admin</option>
+                                </select></div>
+                        </div>
+                        <div class="form-actions"><a href="index.php" class="btn btn-outline">Batal</a><button
+                                type="submit" name="store" value="1" class="btn btn-primary">Simpan</button></div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
