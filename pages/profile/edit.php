@@ -1,1 +1,45 @@
-<?php require_once '../../config/bootstrap.php'; require_once '../../repositories/user-repository.php'; $user=requireLogin('../auth/login.php'); $user=getUser((int)$user['id']); $profile=getProfile((int)$user['id']);$base='../../';$pageTitle='Profil Saya';$pageSubtitle='Kelola informasi akun Anda';?><!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=$pageTitle?></title><link rel="stylesheet" href="../../styles/profile/edit.css"></head><body><div class="app-shell"><?php require '../../components/admin/sidebar.php';?><main class="app-main"><?php require '../../components/admin/topbar.php';?><div class="app-content"><form method="POST" action="../../actions/profile/update.php"><div class="form-card"><div class="form-row"><div class="form-group"><label>Nama</label><input required name="name" value="<?=e($user['name'])?>"></div><div class="form-group"><label>Email</label><input required type="email" name="email" value="<?=e($user['email'])?>"></div></div><div class="form-group"><label>No. Telepon</label><input name="phone" value="<?=e($profile['phone'])?>"></div><div class="form-group"><label>Alamat</label><input name="address" value="<?=e($profile['address'])?>"></div><div class="form-group"><label>Bio</label><textarea name="bio" rows="4"><?=e($profile['bio'])?></textarea></div><div class="form-actions"><button type="submit" name="update" value="1" class="btn btn-primary">Simpan Perubahan</button></div></div></form></div></main></div></body></html>
+<?php require_once '../../config/bootstrap.php';
+require_once '../../repositories/user-repository.php';
+$user = requireLogin('../auth/login.php');
+$user = getUser((int) $user['id']);
+$profile = getProfile((int) $user['id']);
+$base = '../../';
+$pageTitle = 'Profil Saya';
+$pageSubtitle = 'Kelola informasi akun Anda'; ?><!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><?= $pageTitle ?></title>
+    <link rel="stylesheet" href="../../styles/profile/edit.css">
+</head>
+
+<body>
+    <div class="app-shell"><?php require '../../components/admin/sidebar.php'; ?>
+        <main class="app-main"><?php require '../../components/admin/topbar.php'; ?>
+            <div class="app-content">
+                <form method="POST" action="../../actions/profile/update.php">
+                    <div class="form-card">
+                        <div class="form-row">
+                            <div class="form-group"><label>Nama</label><input required name="name"
+                                    value="<?= e($user['name']) ?>"></div>
+                            <div class="form-group"><label>Email</label><input required type="email" name="email"
+                                    value="<?= e($user['email']) ?>"></div>
+                        </div>
+                        <div class="form-group"><label>No. Telepon</label><input name="phone"
+                                value="<?= e($profile['phone']) ?>"></div>
+                        <div class="form-group"><label>Alamat</label><input name="address"
+                                value="<?= e($profile['address']) ?>"></div>
+                        <div class="form-group"><label>Bio</label><textarea name="bio"
+                                rows="4"><?= e($profile['bio']) ?></textarea></div>
+                        <div class="form-actions"><button type="submit" name="update" value="1"
+                                class="btn btn-primary">Simpan Perubahan</button></div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
