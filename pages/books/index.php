@@ -1,10 +1,11 @@
 <?php require_once '../../config/bootstrap.php';
 requireLogin('../auth/login.php');
 require_once '../../repositories/book-repository.php';
+require_once '../../repositories/category-repository.php';
 $search = trim($_GET['search'] ?? '');
 $cat = (int) ($_GET['category'] ?? 0);
 $books = getBooks($search, $cat);
-$categories = db()['categories'];
+$categories = getCategories();
 $base = '../../';
 $pageTitle = 'Manajemen Buku';
 $pageSubtitle = 'Kelola data buku, kategori, dan penulis'; ?>

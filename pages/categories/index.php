@@ -1,1 +1,54 @@
-<?php require_once '../../config/bootstrap.php';requireLogin('../auth/login.php');require_once '../../repositories/category-repository.php';$search=trim($_GET['search']??'');$categories=getCategories($search);$base='../../';$pageTitle='Manajemen Kategori';$pageSubtitle='Kelola kategori buku';?><!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=$pageTitle?></title><link rel="stylesheet" href="../../styles/categories/index.css"></head><body><div class="app-shell"><?php require '../../components/admin/sidebar.php';?><main class="app-main"><?php require '../../components/admin/topbar.php';?><div class="app-content"><div class="toolbar"><form method="GET" action="index.php" class="toolbar-filters"><input name="search" value="<?=e($search)?>" class="search-input" placeholder="Cari kategori..."><button class="btn btn-outline btn-sm">Cari</button></form><a href="create.php" class="btn btn-primary">+ Tambah Kategori</a></div><div class="data-card"><table class="data-table"><thead><tr><th>Nama</th><th>Deskripsi</th><th>Aksi</th></tr></thead><tbody><?php foreach($categories as $c):?><tr><td><?=e($c['name'])?></td><td><?=e($c['description'])?></td><td><a href="edit.php?id=<?=$c['id']?>" class="btn btn-outline btn-sm">Edit</a> <a onclick="return confirm('Hapus kategori ini?')" href="../../actions/categories/destroy.php?id=<?=$c['id']?>" class="btn btn-danger btn-sm">Hapus</a></td></tr><?php endforeach;?></tbody></table></div></div></main></div></body></html>
+<?php require_once '../../config/bootstrap.php';
+requireLogin('../auth/login.php');
+require_once '../../repositories/category-repository.php';
+$search = trim($_GET['search'] ?? '');
+$categories = getCategories($search);
+$base = '../../';
+$pageTitle = 'Manajemen Kategori';
+$pageSubtitle = 'Kelola kategori buku'; ?><!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><?= $pageTitle ?></title>
+    <link rel="stylesheet" href="../../styles/categories/index.css">
+</head>
+
+<body>
+    <div class="app-shell"><?php require '../../components/admin/sidebar.php'; ?>
+        <main class="app-main"><?php require '../../components/admin/topbar.php'; ?>
+            <div class="app-content">
+                <div class="toolbar">
+                    <form method="GET" action="index.php" class="toolbar-filters"><input name="search"
+                            value="<?= e($search) ?>" class="search-input" placeholder="Cari kategori..."><button
+                            class="btn btn-outline btn-sm">Cari</button></form><a href="create.php"
+                        class="btn btn-primary">+ Tambah Kategori</a>
+                </div>
+                <div class="data-card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Deskripsi</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody><?php foreach ($categories as $c): ?>
+                                <tr>
+                                    <td><?= e($c['name']) ?></td>
+                                    <td><?= e($c['description']) ?></td>
+                                    <td><a href="edit.php?id=<?= $c['id'] ?>" class="btn btn-outline btn-sm">Edit</a> <a
+                                            onclick="return confirm('Hapus kategori ini?')"
+                                            href="../../actions/categories/destroy.php?id=<?= $c['id'] ?>"
+                                            class="btn btn-danger btn-sm">Hapus</a></td>
+                                </tr><?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
