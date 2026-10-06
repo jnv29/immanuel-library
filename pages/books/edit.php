@@ -1,10 +1,12 @@
 <?php require_once '../../config/bootstrap.php';
 requireLogin('../auth/login.php');
 require_once '../../repositories/book-repository.php';
+require_once '../../repositories/category-repository.php';
+require_once '../../repositories/author-repository.php';
 $id = (int) ($_GET['id'] ?? 0);
 $book = getBook($id);
-$categories = db()['categories'];
-$authors = db()['authors'];
+$categories = getCategories();
+$authors = getAuthors();
 if (!$book) {
     flash('Buku tidak ditemukan.', 'error');
     redirect('index.php');
