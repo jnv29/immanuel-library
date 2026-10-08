@@ -1,4 +1,4 @@
-<?php $u = currentUser();
+<?php $topbarUser = currentUser();
 $flash = getFlash(); ?>
 <header class="bg-white shadow p-4 mb-6 flex justify-between items-center">
     <div>
@@ -6,7 +6,7 @@ $flash = getFlash(); ?>
         <p class="text-sm text-slate-500"><?= e($pageSubtitle ?? 'Sistem Manajemen Perpustakaan') ?></p>
     </div>
     <div class="flex items-center gap-2">
-        <span class="text-sm font-medium text-slate-700"><?= e($u['name'] ?? 'Admin') ?></span>
+        <span class="text-sm font-medium text-slate-700"><?= e($topbarUser['name'] ?? 'Admin') ?></span>
     </div>
 </header>
 <?php if ($flash): ?>
